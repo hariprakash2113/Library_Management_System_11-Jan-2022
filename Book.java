@@ -57,7 +57,7 @@ public class Book {
             int num = Integer.parseInt(Main.sc.nextLine());
             Main.books.get(pos).quantity+=num;
             Main.books.get(pos).availableQuantity+=num;
-            System.out.printf("%d number of %s books has been added to Library\n",num,Main.books.get(pos).bookName);
+            System.out.printf("%d number of %s book has been added to Library\n",num,Main.books.get(pos).bookName);
             System.out.println("Press any key to return to Admin page");
             Main.sc.nextLine();
             Admin.adminPage(ind);
