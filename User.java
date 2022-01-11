@@ -60,7 +60,7 @@ public class User {
                 // borrows();
                 break;
             case 4:
-                // finesNwallet();
+                finesNwallet(ind);
                 break;
             case 5:
                 login();
@@ -70,6 +70,14 @@ public class User {
                 System.out.println("Enter correct Option");
                 userPage(ind);
         }
+    }
+
+    static void finesNwallet(int ind) {
+        System.out.println("You haven't laid any fine amount Until now");
+        System.out.println("Wallet Amount Remaining => " + Main.users.get(ind).depositAmount);
+        System.out.println("Press any key to get back to User Home page");
+        Main.sc.nextLine();
+        userPage(ind);
     }
 
 }
