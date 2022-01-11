@@ -53,7 +53,7 @@ public class Admin {
         int n = Integer.parseInt(Main.sc.nextLine());
         switch (n) {
             case 1:
-                // Book.addBook();
+                Book.addBook(ind);
                 break;
             case 2:
                 // Book.modify();
