@@ -65,7 +65,7 @@ public class Admin {
                 Admin.addNewAdmin(ind);
                 break;
             case 5:
-                // User.addUser();
+                Admin.addUser(ind);
                 break;
             case 6:
                 // Book.viewBooks();
@@ -102,6 +102,24 @@ public class Admin {
         int n = Integer.parseInt(Main.sc.nextLine());
         if (n == 1) {
             addNewAdmin(ind);
+        } else {
+            Admin.adminPage(ind);
+        }
+    }
+
+    static void addUser(int ind) {
+        System.out.print("Enter new User name : ");
+        String name = Main.sc.nextLine();
+        System.out.print("Enter Email of New email : ");
+        String userId = Main.sc.nextLine();
+        System.out.print("Enter Password of New User : ");
+        String password = Main.sc.nextLine();
+        Main.users.add(new User(name,userId,password));
+        System.out.printf("User %s has been Successfully Added\n", name);
+        System.out.println("Enter 1 to add one another User else any other key for returing to to Admin page");
+        int n = Integer.parseInt(Main.sc.nextLine());
+        if (n == 1) {
+            addUser(ind);
         } else {
             Admin.adminPage(ind);
         }

@@ -23,6 +23,7 @@ public class User {
         for (int i = 0; i < Main.users.size(); i++) {
             if (Main.users.get(i).email.equals(email)) {
                 ind = i;
+                break;
             }
         }
         if (ind == -1) {
@@ -31,8 +32,8 @@ public class User {
         } else {
             System.out.print("Enter Password : ");
             String pass = Main.sc.nextLine();
-            if (Main.admins.get(ind).password.equals(pass)) {
-                // userPage(ind);
+            if (Main.users.get(ind).password.equals(pass)) {
+                userPage(ind);
             } else {
                 System.out.println("Wrong Password ! Try Again");
                 login();
@@ -41,7 +42,7 @@ public class User {
     }
 
     static void userPage(int ind) {
-        System.out.printf("----Welcome , %s -----\n", Main.admins.get(ind).name);
+        System.out.printf("----Welcome , %s -----\n", Main.users.get(ind).userName);
         System.out.println("Please Select an option");
         System.out.println("    -> Enter 1 for Geting a book");
         System.out.println("    -> Enter 2 searching a book");

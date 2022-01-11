@@ -11,6 +11,7 @@ public class Main {
 
     static {
         admins.add(new Admin("Hari", "1108", "hari"));
+        users.add(new User("hari","hari","1108"));
     }
 
     public static void main(String[] args) {
@@ -27,7 +28,7 @@ public class Main {
         if (n == 1) {
             Admin.login();
         } else if (n == 2) {
-            // User.login();
+            User.login();
         } else if (n == 3) {
             System.exit(0);
         } else {
