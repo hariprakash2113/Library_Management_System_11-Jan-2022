@@ -12,8 +12,9 @@ public class Admin {
 
     static void login() {
         System.out.println("-----Welcome Admin-----");
-        System.out.println("Enter your Email ID or 0 to Exit : ");
+        System.out.print("Enter your Email ID or 0 to Exit : ");
         String email = Main.sc.nextLine();
+        if(email.equals("0"))Main.homepage();
         int ind = -1;
         for (int i = 0; i < Main.admins.size(); i++) {
             if (Main.admins.get(i).email.equals(email)) {
@@ -36,7 +37,7 @@ public class Admin {
     }
 
     static void adminPage(int ind) {
-        System.out.printf("----Welcome , %s -----", Main.admins.get(ind).name);
+        System.out.printf("----Welcome , %s -----\n", Main.admins.get(ind).name);
         System.out.println("Please Select an option");
         System.out.println("    -> Enter 1 for Adding a book");
         System.out.println("    -> Enter 2 for Modifing Book Details");

@@ -23,7 +23,7 @@ public class Main {
         System.out.print("Enter Choice : ");
         int n = Integer.parseInt(sc.nextLine());
         if (n == 1) {
-            // Admin.login();
+            Admin.login();
         } else if (n == 2) {
             // User.login();
         } else if (n == 3) {
