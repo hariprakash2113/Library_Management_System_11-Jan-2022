@@ -97,7 +97,7 @@ public class Admin {
         System.out.print("Enter Password of New Admin : ");
         String password = Main.sc.nextLine();
         Main.admins.add(new Admin(name, password, userId));
-        System.out.printf("Book %s has been Successfully Added\n", name);
+        System.out.printf("Admin %s has been Successfully Added\n", name);
         System.out.println("Enter 1 to add one another Admin else any other key for returing to to Admin page");
         int n = Integer.parseInt(Main.sc.nextLine());
         if (n == 1) {
