@@ -7,6 +7,7 @@ public class Main {
 
     static ArrayList<Admin> admins = new ArrayList<>();
     static ArrayList<User> users = new ArrayList<>();
+    static ArrayList<Book> books = new ArrayList<>();
 
     static {
         admins.add(new Admin("Hari", "1108", "hari"));
