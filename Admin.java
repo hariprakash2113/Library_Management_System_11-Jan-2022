@@ -56,7 +56,7 @@ public class Admin {
                 Book.addBook(ind);
                 break;
             case 2:
-                // Book.modify();
+                Book.modify(ind);
                 break;
             case 3:
                 // Book.deleteBook();

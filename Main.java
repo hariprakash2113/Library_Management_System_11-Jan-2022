@@ -12,6 +12,10 @@ public class Main {
     static {
         admins.add(new Admin("Hari", "1108", "hari"));
         users.add(new User("hari","hari","1108"));
+        books.add(new Book("bookName", "authorName", 1, 50, 50, "Hari"));
+        books.add(new Book("bookName1", "authorName1", 2, 100, 100, "Hari"));
+        books.add(new Book("bookName2", "authorName2", 3, 30, 30, "Hari"));
+        books.add(new Book("bookName3", "authorName3", 4, 60, 60, "Hari"));
     }
 
     public static void main(String[] args) {
