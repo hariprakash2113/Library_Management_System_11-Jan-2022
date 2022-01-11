@@ -62,7 +62,7 @@ public class Admin {
                 // Book.deleteBook();
                 break;
             case 4:
-                // Admin.addNewAdmin();
+                Admin.addNewAdmin(ind);
                 break;
             case 5:
                 // User.addUser();
@@ -86,6 +86,24 @@ public class Admin {
                 System.out.println("Invalid Input");
                 System.out.println("Enter Correct Choice");
                 adminPage(ind);
+        }
+    }
+
+    static void addNewAdmin(int ind) {
+        System.out.print("Enter new Admin name : ");
+        String name = Main.sc.nextLine();
+        System.out.print("Enter Email of New Admin : ");
+        String userId = Main.sc.nextLine();
+        System.out.print("Enter Password of New Admin : ");
+        String password = Main.sc.nextLine();
+        Main.admins.add(new Admin(name, password, userId));
+        System.out.printf("Book %s has been Successfully Added\n", name);
+        System.out.println("Enter 1 to add one another Admin else any other key for returing to to Admin page");
+        int n = Integer.parseInt(Main.sc.nextLine());
+        if (n == 1) {
+            addNewAdmin(ind);
+        } else {
+            Admin.adminPage(ind);
         }
     }
 }
