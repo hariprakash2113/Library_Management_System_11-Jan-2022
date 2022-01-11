@@ -14,7 +14,8 @@ public class Admin {
         System.out.println("-----Welcome Admin-----");
         System.out.print("Enter your Email ID or 0 to Exit : ");
         String email = Main.sc.nextLine();
-        if(email.equals("0"))Main.homepage();
+        if (email.equals("0"))
+            Main.homepage();
         int ind = -1;
         for (int i = 0; i < Main.admins.size(); i++) {
             if (Main.admins.get(i).email.equals(email)) {

@@ -5,14 +5,15 @@ public class Main {
 
     static Scanner sc = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        homepage();
-    }
-
     static ArrayList<Admin> admins = new ArrayList<>();
+    static ArrayList<User> users = new ArrayList<>();
 
     static {
         admins.add(new Admin("Hari", "1108", "hari"));
+    }
+
+    public static void main(String[] args) {
+        homepage();
     }
 
     static void homepage() {
