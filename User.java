@@ -6,6 +6,7 @@ public class User {
     Boolean memCardAvailable = true;
     Integer depositAmount = 1500;
     Integer borrowedBooks = 0;
+    static int finePerday=2;
 
     public User(String userName, String email, String password) {
         this.userName = userName;
@@ -79,6 +80,13 @@ public class User {
         System.out.println("Press any key to get back to User Home page");
         Main.sc.nextLine();
         userPage(ind);
+    }
+
+    public static void fineLimit(int ind) {
+        System.out.print("Enter new Fine Limit : ");
+        finePerday= Integer.parseInt(Main.sc.nextLine());
+        System.out.println("New Fine limit has been upated");
+        Admin.adminPage(ind);
     }
 
 }

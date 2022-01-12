@@ -74,7 +74,7 @@ public class Admin {
                 // Book.search();
                 break;
             case 8:
-                // User.fineLimit();
+                User.fineLimit(ind);
                 break;
             case 9:
                 // Book.generateReport();
