@@ -4,7 +4,7 @@ public class Book {
     Integer ISBNno;
     Integer quantity;
     Integer availableQuantity;
-    Integer borrowCount;
+    Integer borrowCount=0;
     String addedBy;
 
     public Book(String bookName, String authorName, Integer iSBNno, Integer quantity, Integer availableQuantity,
@@ -106,23 +106,32 @@ public class Book {
         if (isbn.equals("0"))
             Admin.adminPage(ind);
         int pos = -1;
-        for (int i = 0; i < Main.books.size(); i++) {
-            if (Main.books.get(i).ISBNno == Integer.parseInt(isbn) || Main.books.get(i).bookName.equals(isbn)) {
-                pos = i;
-                break;
+        try {
+            for (int i = 0; i < Main.books.size(); i++) {
+                if (Main.books.get(i).ISBNno == Integer.parseInt(isbn) || Main.books.get(i).bookName.equals(isbn)) {
+                    pos = i;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            for (int i = 0; i < Main.books.size(); i++) {
+                if (Main.books.get(i).bookName.equals(isbn)) {
+                    pos = i;
+                    break;
+                }
             }
         }
         if (pos == -1) {
-            System.out.println("Book not found\nEnter correct number");
+            System.out.println("Book not found\nEnter correct number or Name");
             search(ind);
         } else {
-            System.out.println("Name of the Book => " + Main.books.get(pos).ISBNno);
+            System.out.println("ISB number of the Book => " + Main.books.get(pos).ISBNno);
             System.out.println("Name of the Book => " + Main.books.get(pos).bookName);
-            System.out.println("Name of the Book => " + Main.books.get(pos).authorName);
-            System.out.println("Name of the Book => " + Main.books.get(pos).addedBy);
-            System.out.println("Name of the Book => " + Main.books.get(pos).quantity);
-            System.out.println("Name of the Book => " + Main.books.get(pos).availableQuantity);
-            System.out.println("Name of the Book => " + Main.books.get(pos).borrowCount);
+            System.out.println("Author of the Book => " + Main.books.get(pos).authorName);
+            System.out.println("Book added in library by => " + Main.books.get(pos).addedBy);
+            System.out.println("Quantity of Book added => " + Main.books.get(pos).quantity);
+            System.out.println("Current quantity of book available => " + Main.books.get(pos).availableQuantity);
+            System.out.println("No. of times Book has been Borrowed => " + Main.books.get(pos).borrowCount);
             System.out.println("\n\n");
             System.out.println("Press any key to get back to Admin page");
             Main.sc.nextLine();
