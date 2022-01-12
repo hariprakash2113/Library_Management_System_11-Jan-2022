@@ -40,24 +40,24 @@ public class Book {
     public static void modify(int ind) {
         System.out.print("Enter ISB number of the Book to Modify or 0 to exit :");
         Integer isbn = Integer.parseInt(Main.sc.nextLine());
-        if (isbn==0)
+        if (isbn == 0)
             Admin.adminPage(ind);
         int pos = -1;
         for (int i = 0; i < Main.books.size(); i++) {
-            if (Main.books.get(i).ISBNno==isbn) {
-                pos = i;break;
+            if (Main.books.get(i).ISBNno == isbn) {
+                pos = i;
+                break;
             }
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number");
             modify(ind);
-        }
-        else{
+        } else {
             System.out.print("Enter Number of books to be added : ");
             int num = Integer.parseInt(Main.sc.nextLine());
-            Main.books.get(pos).quantity+=num;
-            Main.books.get(pos).availableQuantity+=num;
-            System.out.printf("%d number of %s book has been added to Library\n",num,Main.books.get(pos).bookName);
+            Main.books.get(pos).quantity += num;
+            Main.books.get(pos).availableQuantity += num;
+            System.out.printf("%d number of %s book has been added to Library\n", num, Main.books.get(pos).bookName);
             System.out.println("Press any key to return to Admin page");
             Main.sc.nextLine();
             Admin.adminPage(ind);
@@ -67,36 +67,66 @@ public class Book {
     public static void deleteBook(int ind) {
         System.out.print("Enter ISB number of the Book to Delete or 0 to exit :");
         Integer isbn = Integer.parseInt(Main.sc.nextLine());
-        if (isbn==0)
+        if (isbn == 0)
             Admin.adminPage(ind);
         int pos = -1;
         for (int i = 0; i < Main.books.size(); i++) {
-            if (Main.books.get(i).ISBNno==isbn) {
-                pos = i;break;
+            if (Main.books.get(i).ISBNno == isbn) {
+                pos = i;
+                break;
             }
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number");
             deleteBook(ind);
-        }
-        else{
-            System.out.printf("Are you Sure ? You Want to delete \"%s\" book from Library ?\n",Main.books.get(pos).bookName);
+        } else {
+            System.out.printf("Are you Sure ? You Want to delete \"%s\" book from Library ?\n",
+                    Main.books.get(pos).bookName);
             System.out.println("Press \"y\" to confirm else any other key to abort ");
             char opt = Main.sc.nextLine().charAt(0);
-            if(opt=='y'){
+            if (opt == 'y') {
                 Main.books.remove(pos);
-                System.out.printf("Book \"%s\" has been removed from library\n",Main.books.get(pos).bookName);
+                System.out.printf("Book \"%s\" has been removed from library\n", Main.books.get(pos).bookName);
+                System.out.println("Press any key to redirect to admin page");
+                Main.sc.nextLine();
+                Admin.adminPage(ind);
+            } else {
+                System.out.printf("Book \"%s\" not deleted\n", Main.books.get(pos).bookName);
                 System.out.println("Press any key to redirect to admin page");
                 Main.sc.nextLine();
                 Admin.adminPage(ind);
             }
-            else{
-                System.out.printf("Book \"%s\" not deleted\n",Main.books.get(pos).bookName);
-                System.out.println("Press any key to redirect to admin page");
-                Main.sc.nextLine();
-                Admin.adminPage(ind);  
-            }
 
+        }
+    }
+
+    public static void search(int ind) {
+        System.out.print("Enter ISB number or Name of the Book to Search or 0 to exit :");
+        String isbn = Main.sc.nextLine();
+        if (isbn.equals("0"))
+            Admin.adminPage(ind);
+        int pos = -1;
+        for (int i = 0; i < Main.books.size(); i++) {
+            if (Main.books.get(i).ISBNno == Integer.parseInt(isbn) || Main.books.get(i).bookName.equals(isbn)) {
+                pos = i;
+                break;
+            }
+        }
+        if (pos == -1) {
+            System.out.println("Book not found\nEnter correct number");
+            search(ind);
+        } else {
+            System.out.println("Name of the Book => " + Main.books.get(pos).ISBNno);
+            System.out.println("Name of the Book => " + Main.books.get(pos).bookName);
+            System.out.println("Name of the Book => " + Main.books.get(pos).authorName);
+            System.out.println("Name of the Book => " + Main.books.get(pos).addedBy);
+            System.out.println("Name of the Book => " + Main.books.get(pos).quantity);
+            System.out.println("Name of the Book => " + Main.books.get(pos).availableQuantity);
+            System.out.println("Name of the Book => " + Main.books.get(pos).borrowCount);
+            System.out.println("\n\n");
+            System.out.println("Press any key to get back to Admin page");
+            Main.sc.nextLine();
+            Admin.adminPage(ind);
         }
     }
 }

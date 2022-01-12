@@ -71,7 +71,7 @@ public class Admin {
                 // Book.viewBooks();
                 break;
             case 7:
-                // Book.search();
+                Book.search(ind);
                 break;
             case 8:
                 User.fineLimit(ind);
