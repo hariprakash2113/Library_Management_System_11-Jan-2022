@@ -1,13 +1,13 @@
 import java.util.Collections;
-import java.util.concurrent.ThreadPoolExecutor.DiscardPolicy;
+import java.util.Comparator;
 
-public class Book implements Comparable<Book> {
+public class Book implements Comparable<Book>, Comparator<Book> {
     String bookName;
     String authorName;
     Integer ISBNno;
     Integer quantity;
     Integer availableQuantity;
-    Integer borrowCount=0;
+    Integer borrowCount = 0;
     String addedBy;
 
     public Book(String bookName, String authorName, Integer iSBNno, Integer quantity, Integer availableQuantity,
@@ -145,20 +145,24 @@ public class Book implements Comparable<Book> {
         System.out.println("Enter 1 if you want to view books list sorted by name");
         System.out.println("Enter 2 if you want to view books list sorted by available quantity");
         System.out.println("Enter 3 to get back to Admin page");
-        int opt=Integer.parseInt(Main.sc.nextLine());
-        if(opt==1){
+        int opt = Integer.parseInt(Main.sc.nextLine());
+        if (opt == 1) {
             sortByName(ind);
-        }
-        else if(opt==2){
-            //sortByQuantity
-        }
-        else if(opt==3){
+        } else if (opt == 2) {
+            sortByQuantity(ind);
+        } else if (opt == 3) {
             Admin.adminPage(ind);
-        }
-        else{
+        } else {
             System.out.println("Invalid option\nEnter correct option");
             viewBooks(ind);
         }
+    }
+
+    private static void sortByQuantity(int ind) {
+        Collections.sort(Main.books, (o1, o2) -> {
+            return o1.availableQuantity - o2.availableQuantity;
+        });
+        display(ind);
     }
 
     public static void sortByName(int ind) {
@@ -169,14 +173,16 @@ public class Book implements Comparable<Book> {
 
     @Override
     public int compareTo(Book o) {
-        if(this.bookName.compareTo(o.bookName)>0)return 1;
-        else if(this.bookName.compareTo(o.bookName)<0)return -1;
+        if (this.bookName.compareTo(o.bookName) > 0)
+            return 1;
+        else if (this.bookName.compareTo(o.bookName) < 0)
+            return -1;
         return 0;
     }
 
-    static void display(int ind){
+    static void display(int ind) {
         System.out.println("-----Book list sorted by name-----");
-        for(int i=0;i<Main.books.size();i++,System.out.println()){
+        for (int i = 0; i < Main.books.size(); i++, System.out.println()) {
             System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);
             System.out.println("Name of the Book => " + Main.books.get(i).bookName);
             System.out.println("Author of the Book => " + Main.books.get(i).authorName);
@@ -189,5 +195,5 @@ public class Book implements Comparable<Book> {
         Main.sc.nextLine();
         Admin.adminPage(ind);
     }
-    
+
 }
