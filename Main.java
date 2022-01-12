@@ -1,21 +1,22 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
     static Scanner sc = new Scanner(System.in);
 
-    static ArrayList<Admin> admins = new ArrayList<>();
-    static ArrayList<User> users = new ArrayList<>();
-    static ArrayList<Book> books = new ArrayList<>();
+    static List<Admin> admins = new ArrayList<>();
+    static List<User> users = new ArrayList<>();
+    static List<Book> books = new ArrayList<>();
 
     static {
         admins.add(new Admin("Hari", "1108", "hari"));
         users.add(new User("hari","hari","1108"));
-        books.add(new Book("bookName", "authorName", 1, 50, 50, "Hari"));
-        books.add(new Book("bookName1", "authorName1", 2, 100, 100, "Hari"));
-        books.add(new Book("bookName2", "authorName2", 3, 30, 30, "Hari"));
-        books.add(new Book("bookName3", "authorName3", 4, 60, 60, "Hari"));
+        books.add(new Book("4", "authorName", 1, 50, 50, "Hari"));
+        books.add(new Book("3", "authorName1", 2, 100, 100, "Hari"));
+        books.add(new Book("2", "authorName2", 3, 30, 30, "Hari"));
+        books.add(new Book("1", "authorName3", 4, 60, 60, "Hari"));
     }
 
     public static void main(String[] args) {

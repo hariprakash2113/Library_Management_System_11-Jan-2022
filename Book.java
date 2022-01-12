@@ -1,4 +1,7 @@
-public class Book {
+import java.util.Collections;
+import java.util.concurrent.ThreadPoolExecutor.DiscardPolicy;
+
+public class Book implements Comparable<Book> {
     String bookName;
     String authorName;
     Integer ISBNno;
@@ -132,10 +135,59 @@ public class Book {
             System.out.println("Quantity of Book added => " + Main.books.get(pos).quantity);
             System.out.println("Current quantity of book available => " + Main.books.get(pos).availableQuantity);
             System.out.println("No. of times Book has been Borrowed => " + Main.books.get(pos).borrowCount);
-            System.out.println("\n\n");
             System.out.println("Press any key to get back to Admin page");
             Main.sc.nextLine();
             Admin.adminPage(ind);
         }
     }
+
+    public static void viewBooks(int ind) {
+        System.out.println("Enter 1 if you want to view books list sorted by name");
+        System.out.println("Enter 2 if you want to view books list sorted by available quantity");
+        System.out.println("Enter 3 to get back to Admin page");
+        int opt=Integer.parseInt(Main.sc.nextLine());
+        if(opt==1){
+            sortByName(ind);
+        }
+        else if(opt==2){
+            //sortByQuantity
+        }
+        else if(opt==3){
+            Admin.adminPage(ind);
+        }
+        else{
+            System.out.println("Invalid option\nEnter correct option");
+            viewBooks(ind);
+        }
+    }
+
+    public static void sortByName(int ind) {
+        Collections.sort(Main.books);
+        display(ind);
+
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        if(this.bookName.compareTo(o.bookName)>0)return 1;
+        else if(this.bookName.compareTo(o.bookName)<0)return -1;
+        return 0;
+    }
+
+    static void display(int ind){
+        System.out.println("-----Book list sorted by name-----");
+        for(int i=0;i<Main.books.size();i++,System.out.println()){
+            System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);
+            System.out.println("Name of the Book => " + Main.books.get(i).bookName);
+            System.out.println("Author of the Book => " + Main.books.get(i).authorName);
+            System.out.println("Book added in library by => " + Main.books.get(i).addedBy);
+            System.out.println("Quantity of Book added => " + Main.books.get(i).quantity);
+            System.out.println("Current quantity of book available => " + Main.books.get(i).availableQuantity);
+            System.out.println("No. of times Book has been Borrowed => " + Main.books.get(i).borrowCount);
+        }
+        System.out.println("Press any key to get back to Admin page");
+        Main.sc.nextLine();
+        Admin.adminPage(ind);
+    }
+    
 }

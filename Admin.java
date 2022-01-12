@@ -68,7 +68,7 @@ public class Admin {
                 Admin.addUser(ind);
                 break;
             case 6:
-                // Book.viewBooks();
+                Book.viewBooks(ind);
                 break;
             case 7:
                 Book.search(ind);
