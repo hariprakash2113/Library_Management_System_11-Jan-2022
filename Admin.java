@@ -59,7 +59,7 @@ public class Admin {
                 Book.modify(ind);
                 break;
             case 3:
-                // Book.deleteBook();
+                Book.deleteBook(ind);
                 break;
             case 4:
                 Admin.addNewAdmin(ind);

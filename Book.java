@@ -63,4 +63,40 @@ public class Book {
             Admin.adminPage(ind);
         }
     }
+
+    public static void deleteBook(int ind) {
+        System.out.print("Enter ISB number of the Book to Delete or 0 to exit :");
+        Integer isbn = Integer.parseInt(Main.sc.nextLine());
+        if (isbn==0)
+            Admin.adminPage(ind);
+        int pos = -1;
+        for (int i = 0; i < Main.books.size(); i++) {
+            if (Main.books.get(i).ISBNno==isbn) {
+                pos = i;break;
+            }
+        }
+        if (pos == -1) {
+            System.out.println("Book not found\nEnter correct number");
+            deleteBook(ind);
+        }
+        else{
+            System.out.printf("Are you Sure ? You Want to delete \"%s\" book from Library ?\n",Main.books.get(pos).bookName);
+            System.out.println("Press \"y\" to confirm else any other key to abort ");
+            char opt = Main.sc.nextLine().charAt(0);
+            if(opt=='y'){
+                Main.books.remove(pos);
+                System.out.printf("Book \"%s\" has been removed from library\n",Main.books.get(pos).bookName);
+                System.out.println("Press any key to redirect to admin page");
+                Main.sc.nextLine();
+                Admin.adminPage(ind);
+            }
+            else{
+                System.out.printf("Book \"%s\" not deleted\n",Main.books.get(pos).bookName);
+                System.out.println("Press any key to redirect to admin page");
+                Main.sc.nextLine();
+                Admin.adminPage(ind);  
+            }
+
+        }
+    }
 }
