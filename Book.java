@@ -228,16 +228,17 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             borrow(aind);
         } else {
             System.out.println("Enter memberId you want to issue book to : ");
-            Integer memid=Integer.parseInt(Main.sc.nextLine());
-            int ind=-1;
+            Integer memid = Integer.parseInt(Main.sc.nextLine());
+            int ind = -1;
             for (int i = 0; i < Main.books.size(); i++) {
                 if (Main.users.get(i).memberId == memid) {
                     ind = i;
                     break;
                 }
             }
-            if(ind==-1){
-                System.out.println("Member with ID "+memid+" not found");borrow(aind);
+            if (ind == -1) {
+                System.out.println("Member with ID " + memid + " not found");
+                borrow(aind);
             }
             if (Main.books.get(pos).availableQuantity > 0) {
                 if (Main.users.get(ind).borrows.contains(Main.books.get(pos))) {

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    static int x=100;
+    static int x = 100;
     String userName;
     String email;
     String password;
@@ -19,7 +19,7 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.memberId=x++;
+        this.memberId = x++;
     }
 
     static void login() {
@@ -54,7 +54,7 @@ public class User {
         System.out.printf("----Welcome , %s -----\n", Main.users.get(ind).userName);
         System.out.println("Please Select an option");
         System.out.println("    -> Enter 1 searching a book");
-        System.out.println("    -> Enter 2 to view your Previous book borrows");
+        System.out.println("    -> Enter 2 to view your Previous Transactions");
         System.out.println("    -> Enter 3 to View your previous Fines & Wallet Amount");
         System.out.println("    -> Enter 4 to Logout");
         int n = Integer.parseInt(Main.sc.nextLine());
@@ -63,7 +63,7 @@ public class User {
                 search(ind);
                 break;
             case 2:
-                // borrows();
+                borrows(ind);
                 break;
             case 3:
                 finesNwallet(ind);
@@ -76,6 +76,22 @@ public class User {
                 System.out.println("Enter correct Option");
                 userPage(ind);
         }
+    }
+
+    static void borrows(int ind) {
+        int j = 0;
+        System.out.println("-----Your Transactions-----");
+        for (Transaction i : Main.users.get(ind).transactions) {
+            System.out.println();
+            System.out.println("Trransaction no : " + (++j));
+            System.out.println("Transaction type => " + i.transaction_type);
+            System.out.println("Book Name => " + i.book.bookName);
+            System.out.println("Author Name =>" + i.book.authorName);
+            System.out.println("ISBN No. of Book =>" + i.book.ISBNno);
+            System.out.println("Transaction Done on => " + new StringBuilder(i.date.toString()).reverse());
+
+        }
+
     }
 
     static void finesNwallet(int ind) {
