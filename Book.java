@@ -334,4 +334,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
 
     }
 
+    public static void generateReport(int ind) {
+        
+    }
+
 }

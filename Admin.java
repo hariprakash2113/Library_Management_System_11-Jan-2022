@@ -80,7 +80,7 @@ public class Admin {
                 User.fineLimit(ind);
                 break;
             case 'i':
-                // Book.generateReport();
+                Book.generateReport(ind);
                 break;
             case 'j':
                 Book.borrow(ind);

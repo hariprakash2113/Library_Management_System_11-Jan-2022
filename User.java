@@ -52,7 +52,8 @@ public class User {
         System.out.println("    -> Enter 1 searching a book");
         System.out.println("    -> Enter 2 to view your Previous Transactions");
         System.out.println("    -> Enter 3 to View your previous Fines & Wallet Amount");
-        System.out.println("    -> Enter 4 to Logout");
+        System.out.println("    -> Enter 4 to Load money on Wallet");
+        System.out.println("    -> Enter 5 to Logout");
         int n = Integer.parseInt(Main.sc.nextLine());
         switch (n) {
             case 1:
@@ -65,6 +66,9 @@ public class User {
                 finesNwallet(ind);
                 break;
             case 4:
+                updateWallet(ind);
+                break;
+            case 5:
                 login();
                 break;
             default:
@@ -72,6 +76,18 @@ public class User {
                 System.out.println("Enter correct Option");
                 userPage(ind);
         }
+    }
+
+    private static void updateWallet(int ind) {
+        System.out.println("Your Current Wallet Amount : "+Main.users.get(ind).depositAmount);
+        System.out.println("Enter Amount to be deposited on Wallet");
+        int amt = Integer.parseInt(Main.sc.nextLine());
+        Main.users.get(ind).depositAmount+=amt;
+        System.out.printf("An amount of %d has been deposited in your Account\n",amt);
+        System.out.println("New Updated Balance => "+Main.users.get(ind).depositAmount);
+        System.out.println("Press any key to return to User Page");
+        Main.sc.nextLine();
+        userPage(ind);
     }
 
     static void borrows(int ind) {
