@@ -14,14 +14,14 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     String addedBy;
 
     public Book(String bookName, String authorName, Integer iSBNno, Integer quantity, Integer availableQuantity,
-            String addedBy,Integer priceofBook) {
+            String addedBy, Integer priceofBook) {
         this.bookName = bookName;
         this.authorName = authorName;
         ISBNno = iSBNno;
         this.quantity = quantity;
         this.availableQuantity = availableQuantity;
         this.addedBy = addedBy;
-        this.priceOFbook=priceofBook;
+        this.priceOFbook = priceofBook;
     }
 
     static void addBook(int ind) {
@@ -35,7 +35,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         Integer priceofBook = Integer.parseInt(Main.sc.nextLine());
         System.out.print("Enter Quantity : ");
         Integer quantity = Integer.parseInt(Main.sc.nextLine());
-        Main.books.add(new Book(bookName, authorName, iSBNno, quantity, quantity, Main.admins.get(ind).name,priceofBook));
+        Main.books.add(
+                new Book(bookName, authorName, iSBNno, quantity, quantity, Main.admins.get(ind).name, priceofBook));
         System.out.printf("Book %s has been Successfully Added\n", bookName);
         System.out.println("Enter 1 to add one another book else any other key for returing to to Admin page");
         int n = Integer.parseInt(Main.sc.nextLine());
@@ -201,6 +202,7 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         Main.sc.nextLine();
         Admin.adminPage(ind);
     }
+
     public static void viewBooklist(int ind) {
         System.out.println("Enter 1 if you want to view books list sorted by name");
         System.out.println("Enter 2 if you want to view books list sorted by available quantity");
@@ -351,25 +353,27 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             if (pos == -1) {
                 System.out.println("Enter ISBN not found in Users List");
                 returnBook(aind);
-            }
-            else{
-                LocalDate borrowDate=null;
+            } else {
+                LocalDate borrowDate = null;
                 int bind = Main.books.indexOf(Main.users.get(ind).borrows.get(pos));
                 Main.books.get(bind).availableQuantity++;
-                for(int i=0;i<Main.users.get(ind).transactions.size();i++){
-                    if(Main.users.get(ind).transactions.get(i).book.equals(Main.books.get(bind))){
-                        borrowDate=Main.users.get(ind).transactions.get(i).date;break;
+                for (int i = 0; i < Main.users.get(ind).transactions.size(); i++) {
+                    if (Main.users.get(ind).transactions.get(i).book.equals(Main.books.get(bind))) {
+                        borrowDate = Main.users.get(ind).transactions.get(i).date;
+                        break;
                     }
                 }
-                int daydraw=0;
-                if(ChronoUnit.DAYS.between(borrowDate,LocalDate.now())>15){
-                    daydraw=(int)ChronoUnit.DAYS.between(borrowDate,LocalDate.now())-15;
-                    Main.users.get(ind).depositAmount-=(daydraw*User.finePerday);
-                    String fine = String.format("Fine Amount of Rs.%d for Late returning of Book\n\n",(daydraw*User.finePerday));
+                int daydraw = 0;
+                if (ChronoUnit.DAYS.between(borrowDate, LocalDate.now()) > 15) {
+                    daydraw = (int) ChronoUnit.DAYS.between(borrowDate, LocalDate.now()) - 15;
+                    Main.users.get(ind).depositAmount -= (daydraw * User.finePerday);
+                    String fine = String.format("Fine Amount of Rs.%d for Late returning of Book\n\n",
+                            (daydraw * User.finePerday));
                     System.out.println(fine);
-                    Main.users.get(ind).fines+=fine;
+                    Main.users.get(ind).fines += fine;
                 }
-                Main.users.get(ind).transactions.add(new Transaction(Main.users.get(ind).borrows.remove(pos), "return",LocalDate.now()));
+                Main.users.get(ind).transactions
+                        .add(new Transaction(Main.users.get(ind).borrows.remove(pos), "return", LocalDate.now()));
                 System.out.println("Book Returned Successfully");
                 System.out.println("Press Any key to return to Admin Page");
                 Main.sc.nextLine();
@@ -386,7 +390,55 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         System.out.println("3.Highly borrowed books");
         System.out.println("4.Back to Admin Page");
         int n = Integer.parseInt(Main.sc.nextLine());
-        
+        switch (n) {
+            case 1:
+                highPerform(ind);
+                break;
+            case 2:
+                nonPerform(ind);
+                break;
+            case 3:
+                highPerform(ind);
+                break;
+            case 4:
+                Admin.adminPage(ind);
+                break;
+            default:
+                System.out.println("Invalid choice");
+                generateReport(ind);
+        }
+    }
+
+    static void highPerform(int ind) {
+        System.out.println("Highest Performing books");
+        for (int i = 0; i < Main.books.size(); i++) {
+            if (Main.books.get(i).borrowCount > 15) {
+                System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);
+                System.out.println("Name of the Book => " + Main.books.get(i).bookName);
+                System.out.println("Author of the Book => " + Main.books.get(i).authorName);
+                System.out.println("Book added in library by => " + Main.books.get(i).addedBy);
+                System.out.println("Quantity of Book added => " + Main.books.get(i).quantity);
+                System.out.println("Current quantity of book available => " + Main.books.get(i).availableQuantity);
+                System.out.println("No. of times Book has been Borrowed => " + Main.books.get(i).borrowCount);
+            }
+        }
+        Admin.adminPage(ind);
+    }
+
+    static void nonPerform(int ind) {
+        System.out.println("Highest Performing books");
+        for (int i = 0; i < Main.books.size(); i++) {
+            if (Main.books.get(i).borrowCount == 0) {
+                System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);
+                System.out.println("Name of the Book => " + Main.books.get(i).bookName);
+                System.out.println("Author of the Book => " + Main.books.get(i).authorName);
+                System.out.println("Book added in library by => " + Main.books.get(i).addedBy);
+                System.out.println("Quantity of Book added => " + Main.books.get(i).quantity);
+                System.out.println("Current quantity of book available => " + Main.books.get(i).availableQuantity);
+                System.out.println("No. of times Book has been Borrowed => " + Main.books.get(i).borrowCount);
+            }
+        }
+        Admin.adminPage(ind);
     }
 
 }
