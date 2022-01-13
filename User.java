@@ -2,15 +2,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    static int x = 100;
     String userName;
     String email;
     String password;
-    Integer memberId;
-    Boolean memCardAvailable = true;
     Integer depositAmount = 1500;
-    Integer borrowedBooks = 0;
     static int finePerday = 2;
+    String fines="";
     List<Book> borrows = new ArrayList<>();
     List<Book> returns = new ArrayList<>();
     List<Transaction> transactions = new ArrayList<>();
@@ -19,7 +16,6 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.password = password;
-        this.memberId = x++;
     }
 
     static void login() {
@@ -88,9 +84,10 @@ public class User {
             System.out.println("Book Name => " + i.book.bookName);
             System.out.println("Author Name =>" + i.book.authorName);
             System.out.println("ISBN No. of Book =>" + i.book.ISBNno);
-            System.out.println("Transaction Done on => " + new StringBuilder(i.date.toString()).reverse());
+            System.out.println("Transaction Done on => " + i.date.toString());
 
         }
+        userPage(ind);
 
     }
 

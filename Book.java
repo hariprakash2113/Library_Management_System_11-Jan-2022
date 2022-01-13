@@ -1,6 +1,7 @@
 import java.util.Collections;
 import java.util.Comparator;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class Book implements Comparable<Book>, Comparator<Book> {
     String bookName;
@@ -227,17 +228,17 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             System.out.println("Book not found\nEnter correct number or Name");
             borrow(aind);
         } else {
-            System.out.println("Enter memberId you want to issue book to : ");
-            Integer memid = Integer.parseInt(Main.sc.nextLine());
+            System.out.print("Enter email you want to issue book to : ");
+            String email = Main.sc.nextLine();
             int ind = -1;
-            for (int i = 0; i < Main.books.size(); i++) {
-                if (Main.users.get(i).memberId == memid) {
+            for (int i = 0; i < Main.users.size(); i++) {
+                if (Main.users.get(i).email.equals(email)) {
                     ind = i;
                     break;
                 }
             }
             if (ind == -1) {
-                System.out.println("Member with ID " + memid + " not found");
+                System.out.println("Member with email " + email + " not found");
                 borrow(aind);
             }
             if (Main.books.get(pos).availableQuantity > 0) {
@@ -255,7 +256,7 @@ public class Book implements Comparable<Book>, Comparator<Book> {
                         Main.books.get(pos).borrowCount += 1;
                         Main.users.get(ind).borrows.add(Main.books.get(pos));
                         Main.users.get(ind).transactions
-                                .add(new Transaction(Main.books.get(pos), "Borrowed", LocalDate.of(2022, 1, 1)));
+                                .add(new Transaction(Main.books.get(pos), "Borrowed", LocalDate.of(2021, 1, 1)));
                         System.out.printf("Book %s has been issued to %s successfully\n", Main.books.get(pos).bookName,
                                 Main.users.get(ind).userName);
                         System.out.println("Enter any key to redirect to Admin Home");
@@ -266,6 +267,62 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             } else {
                 System.out.println("Book is out of stock");
                 System.out.println("Enter any key to redirect to Admin Home");
+                Main.sc.nextLine();
+                Admin.adminPage(aind);
+            }
+        }
+
+    }
+
+    public static void returnBook(int aind) {
+        System.out.print("Enter email ID of User or 0 to exit : ");
+        String email = Main.sc.nextLine();
+        if (email.equals("0"))
+            returnBook(aind);
+        int ind = -1;
+        for (int i = 0; i < Main.books.size(); i++) {
+            if (Main.users.get(i).email.equals(email)) {
+                ind = i;
+                break;
+            }
+        }
+        if (ind == -1) {
+            System.out.println("Member with email " + email + " not found");
+            returnBook(aind);
+        } else {
+            int pos = -1;
+            System.out.print("Enter ISB number of Book :");
+            Integer isbn = Integer.parseInt(Main.sc.nextLine());
+            for (int i = 0; i < Main.users.get(ind).borrows.size(); i++) {
+                if (Main.users.get(ind).borrows.get(i).ISBNno == isbn) {
+                    pos = i;
+                    break;
+                }
+            }
+            if (pos == -1) {
+                System.out.println("Enter ISBN not found in Users List");
+                returnBook(aind);
+            }
+            else{
+                LocalDate borrowDate=null;
+                int bind = Main.books.indexOf(Main.users.get(ind).borrows.get(pos));
+                Main.books.get(bind).availableQuantity++;
+                for(int i=0;i<Main.users.get(ind).transactions.size();i++){
+                    if(Main.users.get(ind).transactions.get(i).book.equals(Main.books.get(bind))){
+                        borrowDate=Main.users.get(ind).transactions.get(i).date;break;
+                    }
+                }
+                int daydraw=0;
+                if(ChronoUnit.DAYS.between(borrowDate,LocalDate.now())>15){
+                    daydraw=(int)ChronoUnit.DAYS.between(borrowDate,LocalDate.now())-15;
+                    Main.users.get(ind).depositAmount-=(daydraw*User.finePerday);
+                    String fine = String.format("Fine Amount of Rs.%d for Late returning of Book\n\n",(daydraw*User.finePerday));
+                    System.out.println(fine);
+                    Main.users.get(ind).fines+=fine;
+                }
+                Main.users.get(ind).transactions.add(new Transaction(Main.users.get(ind).borrows.remove(pos), "return",LocalDate.now()));
+                System.out.println("Book Returned Successfully");
+                System.out.println("Press Any key to return to Admin Page");
                 Main.sc.nextLine();
                 Admin.adminPage(aind);
             }

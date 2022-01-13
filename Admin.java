@@ -86,7 +86,7 @@ public class Admin {
                 Book.borrow(ind);
                 break;
             case 'k':
-                // Book.generateReport();
+                Book.returnBook(ind);
                 break;
             case 'l':
                 // Book.generateReport();

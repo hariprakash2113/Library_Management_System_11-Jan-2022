@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-
 public class Transaction {
     Book book;
     String transaction_type;
