@@ -92,7 +92,12 @@ public class User {
     }
 
     static void finesNwallet(int ind) {
-        System.out.println("You haven't laid any fine amount Until now");
+        if(Main.users.get(ind).fines!=""){
+            System.out.println(Main.users.get(ind).fines);
+        }
+        else{
+            System.out.println("You don't have any History of Fines");userPage(ind);
+        }
         System.out.println("Wallet Amount Remaining => " + Main.users.get(ind).depositAmount);
         System.out.println("Press any key to get back to User Home page");
         Main.sc.nextLine();
