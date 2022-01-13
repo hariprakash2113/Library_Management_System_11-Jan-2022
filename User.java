@@ -155,12 +155,57 @@ public class User {
         System.out.println("Enter 2 for Loss of Book");
         System.out.println("Enter 0 to return to Admin Page");
         int n  = Integer.parseInt(Main.sc.nextLine());
+        if(n==0)Admin.adminPage(ind);
+        System.out.print("Enter User email : ");
+        String email = Main.sc.nextLine();
+        int pos=-1;
+        for(int i=0;i<Main.users.size();i++){
+            if(Main.users.get(i).email.equals(email)){
+                pos=i;
+            }
+        }
+        if(pos==-1){
+            System.out.println("User not found");
+            Admin.adminPage(ind);
+        }
         if(n==1){
-            Main.users.get(ind).depositAmount-=10;
+            Main.users.get(pos).depositAmount-=10;
             String fine = String.format("Fine Amount of Rs.%d for Membership card loss\n\n",10);
             System.out.println(fine);
-            Main.users.get(ind).fines+=fine;
+            Main.users.get(pos).fines+=fine;
         }
-        
+        else if(n==2){
+            System.out.print("Enter ISB number or Name of the Book to Search or 0 to exit :");
+        String isbn = Main.sc.nextLine();
+        if (isbn.equals("0"))
+            Admin.adminPage(ind);
+        int bind = -1;
+        try {
+            for (int i = 0; i < Main.books.size(); i++) {
+                if (Main.books.get(i).ISBNno == Integer.parseInt(isbn) || Main.books.get(i).bookName.equals(isbn)) {
+                    bind = i;
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            for (int i = 0; i < Main.books.size(); i++) {
+                if (Main.books.get(i).bookName.equals(isbn)) {
+                    pos = i;
+                    break;
+                }
+            }
+        }
+        if (pos == -1) {
+            System.out.println("Book not found\nEnter correct number or Name");
+            search(ind);
+        }
+            Main.users.get(pos).depositAmount-= Main.books.get(bind).priceOFbook;
+            Main.books.get(bind).quantity--;
+            String fine = String.format("Fine Amount of Rs.%d for Losing the book \n\n",Main.books.get(bind).priceOFbook);
+            Main.users.get(pos).borrows.remove(Main.books.get(bind));
+            System.out.println(fine);
+            Main.users.get(pos).fines+=fine;
+        }
+        Admin.adminPage(ind);
     }
 }
