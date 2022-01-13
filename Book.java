@@ -201,6 +201,51 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         Main.sc.nextLine();
         Admin.adminPage(ind);
     }
+    public static void viewBooklist(int ind) {
+        System.out.println("Enter 1 if you want to view books list sorted by name");
+        System.out.println("Enter 2 if you want to view books list sorted by available quantity");
+        System.out.println("Enter 3 to get back to Admin page");
+        int opt = Integer.parseInt(Main.sc.nextLine());
+        if (opt == 1) {
+            chronology(ind);
+        } else if (opt == 2) {
+            sortByQuan(ind);
+        } else if (opt == 3) {
+            User.userPage(ind);
+        } else {
+            System.out.println("Invalid option\nEnter correct option");
+            viewBooklist(ind);
+        }
+    }
+
+    private static void sortByQuan(int ind) {
+        Collections.sort(Main.books, (o1, o2) -> {
+            return o1.availableQuantity - o2.availableQuantity;
+        });
+        displayBooks(ind);
+    }
+
+    public static void chronology(int ind) {
+        Collections.sort(Main.books);
+        displayBooks(ind);
+
+    }
+
+    static void displayBooks(int ind) {
+        System.out.println("-----Book list sorted by name-----");
+        for (int i = 0; i < Main.books.size(); i++, System.out.println()) {
+            System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);
+            System.out.println("Name of the Book => " + Main.books.get(i).bookName);
+            System.out.println("Author of the Book => " + Main.books.get(i).authorName);
+            System.out.println("Book added in library by => " + Main.books.get(i).addedBy);
+            System.out.println("Quantity of Book added => " + Main.books.get(i).quantity);
+            System.out.println("Current quantity of book available => " + Main.books.get(i).availableQuantity);
+            System.out.println("No. of times Book has been Borrowed => " + Main.books.get(i).borrowCount);
+        }
+        System.out.println("Press any key to get back to Admin page");
+        Main.sc.nextLine();
+        User.userPage(ind);
+    }
 
     @Override
     public int compare(Book o1, Book o2) {
@@ -335,6 +380,12 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     public static void generateReport(int ind) {
+        System.out.println("------Generate Reports------");
+        System.out.println("1.Highest Performing books");
+        System.out.println("2.Non Performing books");
+        System.out.println("3.Highly borrowed books");
+        System.out.println("4.Back to Admin Page");
+        int n = Integer.parseInt(Main.sc.nextLine());
         
     }
 
