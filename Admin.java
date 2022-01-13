@@ -40,46 +40,58 @@ public class Admin {
     static void adminPage(int ind) {
         System.out.printf("----Welcome , %s -----\n", Main.admins.get(ind).name);
         System.out.println("Please Select an option");
-        System.out.println("    -> Enter 1 for Adding a book");
-        System.out.println("    -> Enter 2 for Modifing Book Details");
-        System.out.println("    -> Enter 3 for Deleting a book");
-        System.out.println("    -> Enter 4 to Add a admin");
-        System.out.println("    -> Enter 5 to add a User");
-        System.out.println("    -> Enter 6 to view List of Books");
-        System.out.println("    -> Enter 7 to search a book");
-        System.out.println("    -> Enter 8 to Edit Fine Limit");
-        System.out.println("    -> Enter 9 to Generate reports");
-        System.out.println("    -> Enter 0 to Logout");
-        int n = Integer.parseInt(Main.sc.nextLine());
-        switch (n) {
-            case 1:
+        System.out.println("    -> Enter a for Adding a book");
+        System.out.println("    -> Enter b for Modifing Book Details");
+        System.out.println("    -> Enter c for Deleting a book");
+        System.out.println("    -> Enter d to Add a admin");
+        System.out.println("    -> Enter e to add a User");
+        System.out.println("    -> Enter f to view List of Books");
+        System.out.println("    -> Enter g to search a book");
+        System.out.println("    -> Enter h to Edit Fine Limit");
+        System.out.println("    -> Enter i to Generate reports");
+        System.out.println("    -> Enter j to Issue Book");
+        System.out.println("    -> Enter k to Return Book");
+        System.out.println("    -> Enter l to Lend Fine on User");
+        System.out.println("    -> Enter m to Logout");
+        char c = Main.sc.nextLine().charAt(0);
+        switch (c) {
+            case 'a':
                 Book.addBook(ind);
                 break;
-            case 2:
+            case 'b':
                 Book.modify(ind);
                 break;
-            case 3:
+            case 'c':
                 Book.deleteBook(ind);
                 break;
-            case 4:
+            case 'd':
                 Admin.addNewAdmin(ind);
                 break;
-            case 5:
+            case 'e':
                 Admin.addUser(ind);
                 break;
-            case 6:
+            case 'f':
                 Book.viewBooks(ind);
                 break;
-            case 7:
+            case 'g':
                 Book.search(ind);
                 break;
-            case 8:
+            case 'h':
                 User.fineLimit(ind);
                 break;
-            case 9:
+            case 'i':
                 // Book.generateReport();
                 break;
-            case 0:
+            case 'j':
+                Book.borrow(ind);
+                break;
+            case 'k':
+                // Book.generateReport();
+                break;
+            case 'l':
+                // Book.generateReport();
+                break;
+            case 'm':
                 Main.homepage();
                 break;
             default:

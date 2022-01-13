@@ -13,6 +13,7 @@ public class Main {
     static {
         admins.add(new Admin("Hari", "1108", "hari"));
         users.add(new User("hari","hari","1108"));
+        users.add(new User("sundar","sundu","1603"));
         books.add(new Book("4", "authorName", 1, 50, 50, "Hari"));
         books.add(new Book("3", "authorName1", 2, 100, 100, "Hari"));
         books.add(new Book("2", "authorName2", 3, 30, 30, "Hari"));

@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     String userName;
     String email;
@@ -7,6 +10,9 @@ public class User {
     Integer depositAmount = 1500;
     Integer borrowedBooks = 0;
     static int finePerday = 2;
+    List<Book> borrows = new ArrayList<>();
+    List<Book> returns = new ArrayList<>();
+    List<Transaction> transactions = new ArrayList<>();
 
     public User(String userName, String email, String password) {
         this.userName = userName;
@@ -45,26 +51,22 @@ public class User {
     static void userPage(int ind) {
         System.out.printf("----Welcome , %s -----\n", Main.users.get(ind).userName);
         System.out.println("Please Select an option");
-        System.out.println("    -> Enter 1 for Geting a book");
-        System.out.println("    -> Enter 2 searching a book");
-        System.out.println("    -> Enter 3 to view your Previous book borrows");
-        System.out.println("    -> Enter 4 to View your previous Fines & Wallet Amount");
-        System.out.println("    -> Enter 5 to Logout");
+        System.out.println("    -> Enter 1 searching a book");
+        System.out.println("    -> Enter 2 to view your Previous book borrows");
+        System.out.println("    -> Enter 3 to View your previous Fines & Wallet Amount");
+        System.out.println("    -> Enter 4 to Logout");
         int n = Integer.parseInt(Main.sc.nextLine());
         switch (n) {
             case 1:
-                // Book.borrow(ind);
-                break;
-            case 2:
                 search(ind);
                 break;
-            case 3:
+            case 2:
                 // borrows();
                 break;
-            case 4:
+            case 3:
                 finesNwallet(ind);
                 break;
-            case 5:
+            case 4:
                 login();
                 break;
             default:
