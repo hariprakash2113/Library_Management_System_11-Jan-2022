@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+    static int x=100;
     String userName;
     String email;
     String password;
@@ -18,6 +19,7 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.memberId=x++;
     }
 
     static void login() {

@@ -202,11 +202,11 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         return 0;
     }
 
-    public static void borrow(int ind) {
+    public static void borrow(int aind) {
         System.out.print("Enter ISB number or Name of the Book to Search or 0 to exit :");
         String isbn = Main.sc.nextLine();
         if (isbn.equals("0"))
-            Admin.adminPage(ind);
+            Admin.adminPage(aind);
         int pos = -1;
         try {
             for (int i = 0; i < Main.books.size(); i++) {
@@ -225,36 +225,48 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number or Name");
-            borrow(ind);
+            borrow(aind);
         } else {
+            System.out.println("Enter memberId you want to issue book to : ");
+            Integer memid=Integer.parseInt(Main.sc.nextLine());
+            int ind=-1;
+            for (int i = 0; i < Main.books.size(); i++) {
+                if (Main.users.get(i).memberId == memid) {
+                    ind = i;
+                    break;
+                }
+            }
+            if(ind==-1){
+                System.out.println("Member with ID "+memid+" not found");borrow(aind);
+            }
             if (Main.books.get(pos).availableQuantity > 0) {
                 if (Main.users.get(ind).borrows.contains(Main.books.get(pos))) {
                     System.out.println("User has already borrowed this book");
-                    Admin.adminPage(ind);
+                    Admin.adminPage(aind);
                 } else {
                     if (Main.users.get(ind).borrows.size() > 2) {
                         System.out.println("User can only borrow 3 books Parellelly\nReturn a book to issue this one");
                         System.out.println("Enter any key to redirect to Admin Home");
                         Main.sc.nextLine();
-                        Admin.adminPage(ind);
+                        Admin.adminPage(aind);
                     } else {
                         Main.books.get(pos).availableQuantity -= 1;
                         Main.books.get(pos).borrowCount += 1;
                         Main.users.get(ind).borrows.add(Main.books.get(pos));
                         Main.users.get(ind).transactions
                                 .add(new Transaction(Main.books.get(pos), "Borrowed", LocalDate.of(2022, 1, 1)));
-                        System.out.printf("Book %s ha been issued to %s successfully\n", Main.books.get(pos).bookName,
+                        System.out.printf("Book %s has been issued to %s successfully\n", Main.books.get(pos).bookName,
                                 Main.users.get(ind).userName);
                         System.out.println("Enter any key to redirect to Admin Home");
                         Main.sc.nextLine();
-                        Admin.adminPage(ind);
+                        Admin.adminPage(aind);
                     }
                 }
             } else {
                 System.out.println("Book is out of stock");
                 System.out.println("Enter any key to redirect to Admin Home");
                 Main.sc.nextLine();
-                Admin.adminPage(ind);
+                Admin.adminPage(aind);
             }
         }
 
