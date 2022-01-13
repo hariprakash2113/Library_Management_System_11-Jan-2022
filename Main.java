@@ -12,8 +12,8 @@ public class Main {
 
     static {
         admins.add(new Admin("Hari", "1108", "hari"));
-        users.add(new User("hari","hari","1108"));
-        users.add(new User("sundar","sundu","1603"));
+        users.add(new User("hari", "hari", "1108"));
+        users.add(new User("sundar", "sundu", "1603"));
         books.add(new Book("a", "Author a", 1, 50, 50, "Hari"));
         books.add(new Book("b", "Author b", 2, 100, 100, "Hari"));
         books.add(new Book("c", "Author c", 3, 30, 30, "Hari"));
