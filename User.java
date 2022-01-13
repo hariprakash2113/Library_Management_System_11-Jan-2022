@@ -149,4 +149,18 @@ public class User {
             userPage(ind);
         }
     }
+
+    public static void putFine(int ind) {
+        System.out.println("Enter 1 for Membership Card Lost");
+        System.out.println("Enter 2 for Loss of Book");
+        System.out.println("Enter 0 to return to Admin Page");
+        int n  = Integer.parseInt(Main.sc.nextLine());
+        if(n==1){
+            Main.users.get(ind).depositAmount-=10;
+            String fine = String.format("Fine Amount of Rs.%d for Membership card loss\n\n",10);
+            System.out.println(fine);
+            Main.users.get(ind).fines+=fine;
+        }
+        
+    }
 }

@@ -17,10 +17,10 @@ public class Main {
         admins.add(new Admin("Hari", "1108", "hari"));
         users.add(new User("hari", "hari", "1108"));
         users.add(new User("sundar", "sundu", "1603"));
-        books.add(new Book("a", "Author a", 1, 50, 50, "Hari"));
-        books.add(new Book("b", "Author b", 2, 100, 100, "Hari"));
-        books.add(new Book("c", "Author c", 3, 30, 30, "Hari"));
-        books.add(new Book("d", "Author d", 4, 60, 60, "Hari"));
+        books.add(new Book("a", "Author a", 1, 50, 50, "Hari",120));
+        books.add(new Book("b", "Author b", 2, 100, 100, "Hari",240));
+        books.add(new Book("c", "Author c", 3, 30, 30, "Hari",360));
+        books.add(new Book("d", "Author d", 4, 60, 60, "Hari",420));
     }
 
     public static void main(String[] args) {

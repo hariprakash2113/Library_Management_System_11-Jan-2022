@@ -89,7 +89,7 @@ public class Admin {
                 Book.returnBook(ind);
                 break;
             case 'l':
-                // Book.generateReport();
+                User.putFine(ind);
                 break;
             case 'm':
                 Main.homepage();
