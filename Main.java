@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.time.LocalDate;
 // import java.time.temporal.ChronoUnit; 
 
 public class Main {
@@ -23,13 +22,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // long result = ChronoUnit.DAYS.between(d1, d2);
-        // System.out.println(result);
-
         homepage();
     }
 
     static void homepage() {
+        System.out.print("\033[H\033[2J");
         System.out.println("-----LIBRARY MANAGEMENT SYSTEM-----");
         System.out.println("    -> Enter 1 for Admin Login");
         System.out.println("    -> Enter 2 for User Login");

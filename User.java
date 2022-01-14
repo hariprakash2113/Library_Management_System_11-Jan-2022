@@ -19,6 +19,7 @@ public class User {
     }
 
     static void login() {
+        System.out.print("\033[H\033[2J");
         System.out.println("-----Welcome User-----");
         System.out.print("Enter your Email ID or 0 to Exit : ");
         String email = Main.sc.nextLine();
@@ -33,6 +34,8 @@ public class User {
         }
         if (ind == -1) {
             System.out.println("Email ID not found");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             login();
         } else {
             System.out.print("Enter Password : ");
@@ -41,12 +44,15 @@ public class User {
                 userPage(ind);
             } else {
                 System.out.println("Wrong Password ! Try Again");
+                System.out.println("Press any key to continue......");
+                Main.sc.nextLine();
                 login();
             }
         }
     }
 
     static void userPage(int ind) {
+        System.out.print("\033[H\033[2J");
         System.out.printf("----Welcome , %s -----\n", Main.users.get(ind).userName);
         System.out.println("Please Select an option");
         System.out.println("    -> Enter 1 searching a book");
@@ -74,11 +80,15 @@ public class User {
             default:
                 System.out.println("Invalid Choice !");
                 System.out.println("Enter correct Option");
+                System.out.println("Press any key to continue......");
+                Main.sc.nextLine();
                 userPage(ind);
         }
     }
 
     private static void updateWallet(int ind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("-----Update Wallet Amount-----");
         System.out.println("Your Current Wallet Amount : "+Main.users.get(ind).depositAmount);
         System.out.println("Enter Amount to be deposited on Wallet");
         int amt = Integer.parseInt(Main.sc.nextLine());
@@ -91,6 +101,7 @@ public class User {
     }
 
     static void borrows(int ind) {
+        System.out.print("\033[H\033[2J");
         int j = 0;
         System.out.println("-----Your Transactions-----");
         for (Transaction i : Main.users.get(ind).transactions) {
@@ -108,6 +119,8 @@ public class User {
     }
 
     static void finesNwallet(int ind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("----Your Fines and Wallet Amount-----");
         if(Main.users.get(ind).fines!=""){
             System.out.println(Main.users.get(ind).fines);
         }
@@ -121,13 +134,18 @@ public class User {
     }
 
     public static void fineLimit(int ind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("-----Edit Fine Limit-----");
         System.out.print("Enter new Fine Limit : ");
         finePerday = Integer.parseInt(Main.sc.nextLine());
         System.out.println("New Fine limit has been upated");
+        System.out.println("Press any key to continue......");
+        Main.sc.nextLine();
         Admin.adminPage(ind);
     }
 
     public static void search(int ind) {
+        System.out.print("\033[H\033[2J");
         System.out.print("Enter ISB number or Name of the Book to Search or 0 to exit :");
         String isbn = Main.sc.nextLine();
         if (isbn.equals("0"))
@@ -150,6 +168,8 @@ public class User {
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number or Name");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             search(ind);
         } else {
             System.out.println("ISB number of the Book => " + Main.books.get(pos).ISBNno);
@@ -167,6 +187,8 @@ public class User {
     }
 
     public static void putFine(int ind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("-----Lend Fine on User-----");
         System.out.println("Enter 1 for Membership Card Lost");
         System.out.println("Enter 2 for Loss of Book");
         System.out.println("Enter 0 to return to Admin Page");
@@ -182,6 +204,8 @@ public class User {
         }
         if(pos==-1){
             System.out.println("User not found");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             Admin.adminPage(ind);
         }
         if(n==1){
@@ -191,7 +215,7 @@ public class User {
             Main.users.get(pos).fines+=fine;
         }
         else if(n==2){
-            System.out.print("Enter ISB number or Name of the Book to Search or 0 to exit :");
+        System.out.print("Enter ISB number or Name of the Book to Search or 0 to exit :");
         String isbn = Main.sc.nextLine();
         if (isbn.equals("0"))
             Admin.adminPage(ind);
@@ -213,6 +237,8 @@ public class User {
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number or Name");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             search(ind);
         }
             Main.users.get(pos).depositAmount-= Main.books.get(bind).priceOFbook;

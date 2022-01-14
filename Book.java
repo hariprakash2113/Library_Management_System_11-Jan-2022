@@ -25,8 +25,12 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     static void addBook(int ind) {
-        System.out.print("Enter ISB number : ");
+        System.out.print("\033[H\033[2J");
+        System.out.println("-----------Add Book to Library--------");
+        System.out.print("Enter ISB number or 0 to exit : ");
         Integer iSBNno = Integer.parseInt(Main.sc.nextLine());
+        if (iSBNno == 0)
+            Admin.adminPage(ind);
         System.out.print("Enter Book Name : ");
         String bookName = Main.sc.nextLine();
         System.out.print("Enter Author Number : ");
@@ -48,9 +52,11 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     public static void modify(int ind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("--------Modify Book Details--------");
         System.out.print("Enter ISB number of the Book to Modify or 0 to exit :");
         Integer isbn = Integer.parseInt(Main.sc.nextLine());
-        if (isbn == 0)
+        if (isbn == 0) 
             Admin.adminPage(ind);
         int pos = -1;
         for (int i = 0; i < Main.books.size(); i++) {
@@ -61,6 +67,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             modify(ind);
         } else {
             System.out.print("Enter Number of books to be added : ");
@@ -75,6 +83,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     public static void deleteBook(int ind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("---------Delete Book from a Library----------");
         System.out.print("Enter ISB number of the Book to Delete or 0 to exit :");
         Integer isbn = Integer.parseInt(Main.sc.nextLine());
         if (isbn == 0)
@@ -88,8 +98,11 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             deleteBook(ind);
         } else {
+            System.out.print("\033[H\033[2J");
             System.out.printf("Are you Sure ? You Want to delete \"%s\" book from Library ?\n",
                     Main.books.get(pos).bookName);
             System.out.println("Press \"y\" to confirm else any other key to abort ");
@@ -111,6 +124,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     public static void search(int ind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("-------Search a Book--------");
         System.out.print("Enter ISB number or Name of the Book to Search or 0 to exit :");
         String isbn = Main.sc.nextLine();
         if (isbn.equals("0"))
@@ -133,8 +148,12 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number or Name");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             search(ind);
         } else {
+            System.out.print("\033[H\033[2J");
+            System.out.println("-------Details of the Book------");
             System.out.println("ISB number of the Book => " + Main.books.get(pos).ISBNno);
             System.out.println("Name of the Book => " + Main.books.get(pos).bookName);
             System.out.println("Author of the Book => " + Main.books.get(pos).authorName);
@@ -149,6 +168,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     public static void viewBooks(int ind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("------View Book Details--------");
         System.out.println("Enter 1 if you want to view books list sorted by name");
         System.out.println("Enter 2 if you want to view books list sorted by available quantity");
         System.out.println("Enter 3 to get back to Admin page");
@@ -161,6 +182,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             Admin.adminPage(ind);
         } else {
             System.out.println("Invalid option\nEnter correct option");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             viewBooks(ind);
         }
     }
@@ -188,7 +211,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     static void display(int ind) {
-        System.out.println("-----Book list sorted by name-----");
+        System.out.print("\033[H\033[2J");
+        System.out.println("-----Sorted Books List-----");
         for (int i = 0; i < Main.books.size(); i++, System.out.println()) {
             System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);
             System.out.println("Name of the Book => " + Main.books.get(i).bookName);
@@ -204,6 +228,7 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     public static void viewBooklist(int ind) {
+        System.out.println("------View List of Books-----");
         System.out.println("Enter 1 if you want to view books list sorted by name");
         System.out.println("Enter 2 if you want to view books list sorted by available quantity");
         System.out.println("Enter 3 to get back to Admin page");
@@ -216,6 +241,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             User.userPage(ind);
         } else {
             System.out.println("Invalid option\nEnter correct option");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             viewBooklist(ind);
         }
     }
@@ -234,7 +261,7 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     static void displayBooks(int ind) {
-        System.out.println("-----Book list sorted by name-----");
+        System.out.println("-----Sorted Books List-----");
         for (int i = 0; i < Main.books.size(); i++, System.out.println()) {
             System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);
             System.out.println("Name of the Book => " + Main.books.get(i).bookName);
@@ -242,7 +269,6 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             System.out.println("Book added in library by => " + Main.books.get(i).addedBy);
             System.out.println("Quantity of Book added => " + Main.books.get(i).quantity);
             System.out.println("Current quantity of book available => " + Main.books.get(i).availableQuantity);
-            System.out.println("No. of times Book has been Borrowed => " + Main.books.get(i).borrowCount);
         }
         System.out.println("Press any key to get back to Admin page");
         Main.sc.nextLine();
@@ -255,6 +281,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     public static void borrow(int aind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("-------Book issuing Portal-------");
         System.out.print("Enter ISB number or Name of the Book to Search or 0 to exit :");
         String isbn = Main.sc.nextLine();
         if (isbn.equals("0"))
@@ -277,6 +305,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         }
         if (pos == -1) {
             System.out.println("Book not found\nEnter correct number or Name");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             borrow(aind);
         } else {
             System.out.print("Enter email you want to issue book to : ");
@@ -290,11 +320,15 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             }
             if (ind == -1) {
                 System.out.println("Member with email " + email + " not found");
+                System.out.println("Press any key to continue......");
+                Main.sc.nextLine();
                 borrow(aind);
             }
             if (Main.books.get(pos).availableQuantity > 0) {
                 if (Main.users.get(ind).borrows.contains(Main.books.get(pos))) {
                     System.out.println("User has already borrowed this book");
+                    System.out.println("Press any key to continue......");
+                    Main.sc.nextLine();
                     Admin.adminPage(aind);
                 } else {
                     if (Main.users.get(ind).borrows.size() > 2) {
@@ -317,7 +351,7 @@ public class Book implements Comparable<Book>, Comparator<Book> {
                 }
             } else {
                 System.out.println("Book is out of stock");
-                System.out.println("Enter any key to redirect to Admin Home");
+                System.out.println("Enter any key to redirect to Admin Page");
                 Main.sc.nextLine();
                 Admin.adminPage(aind);
             }
@@ -326,6 +360,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     public static void returnBook(int aind) {
+        System.out.print("\033[H\033[2J");
+        System.out.println("------Return Book------");
         System.out.print("Enter email ID of User or 0 to exit : ");
         String email = Main.sc.nextLine();
         if (email.equals("0"))
@@ -339,6 +375,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
         }
         if (ind == -1) {
             System.out.println("Member with email " + email + " not found");
+            System.out.println("Press any key to continue......");
+            Main.sc.nextLine();
             returnBook(aind);
         } else {
             int pos = -1;
@@ -352,6 +390,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
             }
             if (pos == -1) {
                 System.out.println("Enter ISBN not found in Users List");
+                System.out.println("Press any key to continue......");
+                Main.sc.nextLine();
                 returnBook(aind);
             } else {
                 LocalDate borrowDate = null;
@@ -410,7 +450,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     static void highPerform(int ind) {
-        System.out.println("Highest Performing books");
+        System.out.print("\033[H\033[2J");
+        System.out.println("-----Highest Performing books-------");
         for (int i = 0; i < Main.books.size(); i++) {
             if (Main.books.get(i).borrowCount > 15) {
                 System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);
@@ -426,7 +467,8 @@ public class Book implements Comparable<Book>, Comparator<Book> {
     }
 
     static void nonPerform(int ind) {
-        System.out.println("Highest Performing books");
+        System.out.print("\033[H\033[2J");
+        System.out.println("-----Non Performing books----");
         for (int i = 0; i < Main.books.size(); i++) {
             if (Main.books.get(i).borrowCount == 0) {
                 System.out.println("ISB number of the Book => " + Main.books.get(i).ISBNno);

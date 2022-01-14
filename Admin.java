@@ -11,6 +11,7 @@ public class Admin {
     }
 
     static void login() {
+        System.out.print("\033[H\033[2J");
         System.out.println("-----Welcome Admin-----");
         System.out.print("Enter your Email ID or 0 to Exit : ");
         String email = Main.sc.nextLine();
@@ -19,7 +20,7 @@ public class Admin {
         int ind = -1;
         for (int i = 0; i < Main.admins.size(); i++) {
             if (Main.admins.get(i).email.equals(email)) {
-                ind = i;
+                ind = i;break;
             }
         }
         if (ind == -1) {
@@ -38,6 +39,7 @@ public class Admin {
     }
 
     static void adminPage(int ind) {
+        System.out.print("\033[H\033[2J");
         System.out.printf("----Welcome , %s -----\n", Main.admins.get(ind).name);
         System.out.println("Please Select an option");
         System.out.println("    -> Enter a for Adding a book");
@@ -53,6 +55,7 @@ public class Admin {
         System.out.println("    -> Enter k to Return Book");
         System.out.println("    -> Enter l to Lend Fine on User");
         System.out.println("    -> Enter m to Logout");
+        System.out.print("Enter Choice : ");
         char c = Main.sc.nextLine().charAt(0);
         switch (c) {
             case 'a':
@@ -102,8 +105,12 @@ public class Admin {
     }
 
     static void addNewAdmin(int ind) {
-        System.out.print("Enter new Admin name : ");
+        System.out.print("\033[H\033[2J");
+        System.out.println("-----Add new Admin to library-----");
+        System.out.print("Enter new Admin name or 0 to  exit: ");
         String name = Main.sc.nextLine();
+        if (name.equals("0"))
+            adminPage(ind);
         System.out.print("Enter Email of New Admin : ");
         String userId = Main.sc.nextLine();
         System.out.print("Enter Password of New Admin : ");
@@ -115,13 +122,17 @@ public class Admin {
         if (n == 1) {
             addNewAdmin(ind);
         } else {
-            Admin.adminPage(ind);
+            adminPage(ind);
         }
     }
 
     static void addUser(int ind) {
-        System.out.print("Enter new User name : ");
+        System.out.print("\033[H\033[2J");
+        System.out.println("------Add new user to library-----");
+        System.out.print("Enter new User name or 0 to exit : ");
         String name = Main.sc.nextLine();
+        if (name.equals("0"))
+            adminPage(ind);
         System.out.print("Enter Email of New email : ");
         String userId = Main.sc.nextLine();
         System.out.print("Enter Password of New User : ");
